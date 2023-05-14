@@ -35,7 +35,7 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route path="*" element={<>NOT FOUND 404</>} />
+        <Route path="*" element={<>NOT FOUND 404.  </>} />
       </Routes>
     </AuthProvider>
   );
