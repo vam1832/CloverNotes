@@ -1,0 +1,136 @@
+@import "../../scss/variable";
+
+.todo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  min-height: 120px;
+  background-color: $color-white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 0 8px;
+  margin-bottom: 20px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  font-size: $font-size-medium  ;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  appearance: none;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 0.8rem;
+}
+
+.todo-item input[type="checkbox"]:checked {
+  background-color: #3e9bff;
+  border-color: #3e9bff;
+}
+
+.todo-item input[type="checkbox"]:checked:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.todo-item label {
+  font-size: 1rem;
+  user-select: none;
+  text-align: left;
+}
+
+.todo-container {
+  max-width: 95%;
+  padding: 0 8px;
+}
+
+.todo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.todo-data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-edit{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+.todo-edit-data{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.todo-title{
+  display: flex;
+  margin: 12px 0px;
+}
+
+.todo-action-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  button {
+    padding: 10px 10px;
+    background-color: #3e9bff;
+    transition: background-color 0.3s;
+
+    &:hover,
+    &:active {
+      background-color: lighten(#3e9bff, 10%);
+    }
+  }
+}
+
+
+
+.todo-editing-title{
+  display: flex;
+  min-height: 90px;
+  width: 100%;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: Montserrat;
+  font-weight: 400;
+  text-align: left;
+  border: none;
+  resize: none;
+  background-color: #F8F8F8;
+}
+
+.todo-editing-title:focus{
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .todo-item {
+    max-width: 100%;
+  }
+  .todo-container {
+    padding: 0 8px;
+  }
+}

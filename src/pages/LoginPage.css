@@ -1,0 +1,94 @@
+/* Reset CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Login Form */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  max-width: 400px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form__title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-form__input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.login-form__input-group label {
+  margin-bottom: 0.5rem;
+}
+
+.login-form__input-group input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login-form__button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem;
+  margin: 0.2rem 0;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-form__button {
+  min-width: 120px;
+  background-color: #fff;
+  color: #007bff;
+  padding: 0.5rem;
+  margin: 0.2rem 0;
+  font-size: 1rem;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.register-form__button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.login-form__button:hover {
+  background-color: #0069d9;
+}
+
+.login-form__error {
+  color: #dc3545;
+  margin-top: 0.5rem;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+}
