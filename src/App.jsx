@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext.jsx";
+import { AuthProvider } from "./context/AuthProvider";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import HomePage from "./pages/HomePage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
-import "./App.css"
+import "./App.css";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route path="*" element={<>NOT FOUND 404.  </>} />
+        <Route path="*" element={<>NOT FOUND 404. </>} />
       </Routes>
     </AuthProvider>
   );
