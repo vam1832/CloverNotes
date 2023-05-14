@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import "./AudioRecorder.css";
+import "./AudioRecorder.css"
 
 function AudioRecorder({ addTodo, fetchTodos }) {
   const [isRecording, setIsRecording] = useState(false);
-  const [isTranscribing, setIsTranscribing] = useState(false);
+  // const [audioURL, setAudioURL] = useState("");
+  // const [transcription, setTranscription] = useState("");
   const [recorder, setRecorder] = useState(null);
-  const apiKey = import.meta.env.VITE_OPENAI_API_KEY
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
   useEffect(() => {
     if (recorder) {
@@ -17,25 +18,24 @@ function AudioRecorder({ addTodo, fetchTodos }) {
       });
       recorder.addEventListener("stop", () => {
         const audioBlob = new Blob(chunks, { type: "audio/webm" });
+        // setAudioURL(URL.createObjectURL(audioBlob));
         transcribeAudio(audioBlob);
       });
     }
   }, [recorder]);
 
   const handleStartRecording = () => {
-    if (!isTranscribing) {
-      navigator.mediaDevices
-        .getUserMedia({ audio: true })
-        .then((stream) => {
-          const recorder = new MediaRecorder(stream);
-          setRecorder(recorder);
-          setIsRecording(true);
-          recorder.start();
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        const recorder = new MediaRecorder(stream);
+        setRecorder(recorder);
+        setIsRecording(true);
+        recorder.start();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleStopRecording = () => {
@@ -46,10 +46,7 @@ function AudioRecorder({ addTodo, fetchTodos }) {
   };
 
   const transcribeAudio = async (audioBlob) => {
-    if (!isTranscribing) {
-      setIsTranscribing(true);
-
-const formData = new FormData();
+    const formData = new FormData();
     formData.append("file", audioBlob, "audio.webm");
     formData.append("model", "whisper-1");
 
@@ -73,7 +70,7 @@ const formData = new FormData();
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
@@ -106,18 +103,18 @@ const formData = new FormData();
 
     // Limpiar el formulario
     fetchTodos();
-      setIsTranscribing(false);
-    }
   };
 
   return (
     <div className="audio-recorder-container">
-      <button onClick={handleStartRecording} disabled={isRecording || isTranscribing}>
-        Grabar
+      <button onClick={handleStartRecording} disabled={isRecording}>
+        Start Recording
       </button>
-      <button onClick={handleStopRecording} disabled={!isRecording || isTranscribing}>
-        Detener
+      <button onClick={handleStopRecording} disabled={!isRecording}>
+        Stop Recording
       </button>
+      {/* {audioURL && <audio src={audioURL} controls />}
+      {transcription && <p>{transcription}</p>} */}
     </div>
   );
 }
