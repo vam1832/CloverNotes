@@ -3,7 +3,7 @@ import { useFirestore } from "../../context/firestoreContext";
 import Task from "../Task/Task";
 // import TodoForm from "../TaskGPT/TaskGPT";
 import AudioRecorder from "../AudioRecorder/AudioRecorder";
-import styles from "./tasklist.module.scss";
+import styles from "./Tasklist.module.scss";
 
 function TaskList() {
   const { getTodos, addTodo, isLoading } = useFirestore();

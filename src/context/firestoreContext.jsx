@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext } from "react";
 import { app } from "../firebase";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./authContext";
 import {
   getFirestore,
   collection,

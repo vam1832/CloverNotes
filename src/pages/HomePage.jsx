@@ -1,5 +1,5 @@
-import TaskList from "../components/TaskList/tasklist";
-import { useAuth } from "../context/AuthContext";
+import TaskList from "../components/TaskList/TaskList";
+import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { FirestoreProvider } from "../context/firestoreContext";
 import "./HomePage.css"
