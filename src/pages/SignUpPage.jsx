@@ -40,7 +40,7 @@ function SignUpPage() {
     navigate("/login", { replace: true });
   };
   if (loggedIn) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/" replace />;
   } else {
     return (
       <div className="login-container">

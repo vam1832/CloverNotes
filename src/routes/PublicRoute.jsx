@@ -8,7 +8,7 @@ function PublicRoute({ children }) {
   if (isLoading) return <h1>Cargando...</h1>;
 
   if (user) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/" replace />;
   }
   return <>{children}</>;
 }
