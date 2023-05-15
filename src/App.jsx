@@ -12,7 +12,7 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route
-          path="home"
+          path="/"
           element={
             <ProtectedRoute>
               <HomePage />
@@ -20,7 +20,7 @@ function App() {
           }
         />
         <Route
-          path="login"
+          path="/login"
           element={
             <PublicRoute>
               <LoginPage />
@@ -28,7 +28,7 @@ function App() {
           }
         />
         <Route
-          path="register"
+          path="/register"
           element={
             <PublicRoute>
               <SignUpPage />

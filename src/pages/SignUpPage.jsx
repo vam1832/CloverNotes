@@ -26,7 +26,7 @@ function SignUpPage() {
     try {
       await signUp(email, password);
       setLoggedIn(true);
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       setLoggedIn(false);
       setError(
