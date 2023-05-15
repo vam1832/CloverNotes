@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import "./AudioRecorder.css"
 
-function AudioRecorder({ addTodo, fetchTodos }) {
+export function AudioRecorder({ addTodo, fetchTodos }) {
   const [isRecording, setIsRecording] = useState(false);
   // const [audioURL, setAudioURL] = useState("");
   // const [transcription, setTranscription] = useState("");
