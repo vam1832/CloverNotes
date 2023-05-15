@@ -24,7 +24,7 @@ function LoginPage() {
     event.preventDefault();
     try {
       await login(email, password);
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       setError(
         `Error al iniciar sesión. Por favor, intenta de nuevo. ${error.message}`

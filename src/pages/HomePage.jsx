@@ -10,7 +10,7 @@ export default function HomePage() {
 
   const handleLogOut = async () => {
     await logOut();
-    navigate("/login");
+    navigate("/");
   };
 
   if (isLoading) return <h2>cargando...</h2>;

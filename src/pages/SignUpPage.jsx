@@ -37,7 +37,7 @@ function SignUpPage() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   };
   if (loggedIn) {
     return <Navigate to="/" replace />;
