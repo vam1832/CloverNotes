@@ -17,7 +17,7 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
         chunks.push(event.data);
       });
       recorder.addEventListener("stop", () => {
-        const audioBlob = new Blob(chunks, { type: "audio/webm" });
+        const audioBlob = new Blob(chunks, { type: "audio/wav" });
         // setAudioURL(URL.createObjectURL(audioBlob));
         transcribeAudio(audioBlob);
       });
@@ -47,8 +47,10 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
 
   const transcribeAudio = async (audioBlob) => {
     const formData = new FormData();
-    formData.append("file", audioBlob, "audio.webm");
+    formData.append("file", audioBlob, "audio.wav");
     formData.append("model", "whisper-1");
+    console.log(formData.get("file")); // Esto imprimirá el Blob
+    console.log(formData.get("file").type); // Esto imprimirá el tipo MIME del Blob, que en este caso será 'audio/webm'
 
     const response = await fetch(
       "https://api.openai.com/v1/audio/transcriptions",
