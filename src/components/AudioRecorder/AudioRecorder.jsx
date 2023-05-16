@@ -5,7 +5,7 @@ import "./AudioRecorder.css"
 
 export function AudioRecorder({ addTodo, fetchTodos }) {
   const [isRecording, setIsRecording] = useState(false);
-  // const [audioURL, setAudioURL] = useState("");
+  const [audioURL, setAudioURL] = useState("");
   // const [transcription, setTranscription] = useState("");
   const [recorder, setRecorder] = useState(null);
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
@@ -18,7 +18,7 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
       });
       recorder.addEventListener("stop", () => {
         const audioBlob = new Blob(chunks, { type: "audio/wav" });
-        // setAudioURL(URL.createObjectURL(audioBlob));
+        setAudioURL(URL.createObjectURL(audioBlob));
         transcribeAudio(audioBlob);
       });
     }
@@ -115,8 +115,12 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
       <button onClick={handleStopRecording} disabled={!isRecording}>
         Stop Recording
       </button>
-      {/* {audioURL && <audio src={audioURL} controls />}
-      {transcription && <p>{transcription}</p>} */}
+      {audioURL && (
+      <audio controls>
+        <source src={audioURL} type="audio/wav" />
+        Your browser does not support the audio element.
+      </audio>
+    )}
     </div>
   );
 }
