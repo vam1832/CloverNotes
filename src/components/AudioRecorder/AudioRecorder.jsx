@@ -17,7 +17,7 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
         chunks.push(event.data);
       });
       recorder.addEventListener("stop", () => {
-        const audioBlob = new Blob(chunks, { type: "audio/mp4" });
+        const audioBlob = new Blob(chunks, { type: "audio/mp4", bitsPerSecond: 128000 });
         setAudioURL(URL.createObjectURL(audioBlob));
         transcribeAudio(audioBlob);
       });
@@ -116,11 +116,11 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
         Stop Recording
       </button>
       {audioURL && (
-      <audio controls>
-        <source src={audioURL} type="audio/wav" />
-        Your browser does not support the audio element.
-      </audio>
-    )}
+        <audio controls>
+          <source src={audioURL} type="audio/wav" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
     </div>
   );
 }
