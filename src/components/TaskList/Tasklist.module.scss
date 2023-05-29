@@ -42,11 +42,6 @@ form > * {
   align-content: center;
   gap: 8px;
   width: 100%;
-  button{
-    font-size: 2rem;
-    padding: 4px 20px;
-    margin: 0;
-  }
 }
 
 .input-add-todo { 
@@ -62,7 +57,10 @@ form > * {
   padding-inline-start: 8px;
 }
 
-button {
+.add-btn {
+  border-radius: 5px;
+  padding: 4px 20px;
+  margin: 0;
   padding: 10px 20px;
   background-color: #3e9bff;
   color: white;
@@ -73,7 +71,7 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.add-btn:hover {
   background-color: #2c7abf;
 }
 

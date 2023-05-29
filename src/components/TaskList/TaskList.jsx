@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useFirestore } from "../../context/firestoreContext";
 import Task from "../Task/Task";
 // import TodoForm from "../TaskGPT/TaskGPT";
+import Calendar from "../CalendarTask/CalendarTask";
 import AudioRecorder from "../AudioRecorder/AudioRecorder";
 import styles from "./Tasklist.module.scss";
 
 function TaskList() {
-  const { getTodos, addTodo, isLoading } = useFirestore();
-  const [todos, setTodos] = useState([]);
+  const { getTodos, addTodo, isLoading, todos } = useFirestore();
   const [newTodo, setNewTodo] = useState("");
 
   const handleNewTodoChange = (event) => {
@@ -20,20 +20,10 @@ function TaskList() {
       isCompleted: false,
     });
     setNewTodo("");
-    fetchTodos();
-  };
-
-  const fetchTodos = async () => {
-    const todosData = await getTodos();
-    setTodos(todosData);
   };
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      const todosData = await getTodos();
-      setTodos(todosData);
-    };
-    fetchTodos();
+    getTodos();
   }, [getTodos, addTodo]);
 
   if (isLoading) return <h2>cargando...</h2>;
@@ -51,13 +41,14 @@ function TaskList() {
           placeholder="New todo..."
           className={styles["input-add-todo"]}
         />
-        <button onClick={handleNewTodoSubmit}>+</button>
+        <button className={styles['add-btn']} onClick={handleNewTodoSubmit}>+</button>
       </div>
-      <AudioRecorder addTodo={addTodo} fetchTodos={fetchTodos} />
+      <AudioRecorder addTodo={addTodo} getTodos={getTodos} />
+      <Calendar/>
       {todos.length > 0 ? (
         <div className={styles["todos-container"]}>
           {todos.map((todo) => (
-            <Task key={todo.id} todo={todo} fetchTodos={fetchTodos} />
+            <Task key={todo.id} todo={todo} />
           ))}
         </div>
       ) : (

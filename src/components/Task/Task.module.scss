@@ -16,7 +16,7 @@
   font-size: $font-size-medium  ;
 }
 
-.todo-item input[type="checkbox"] {
+.todo-data input[type="checkbox"] {
   width: 22px;
   height: 22px;
   position: relative;
@@ -27,23 +27,38 @@
   cursor: pointer;
   padding: 8px;
   margin-right: 0.8rem;
+  transition: border-color .3s ease-in-out, background-color .3s ease-in-out;
+
+  &:checked {
+    background-color: #3e9bff;
+    border-color: #3e9bff;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: inline-block;
+      width: 12px;
+      height: 10px;
+      background-image: url("src/assets/check-mark-icon.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0;
+      animation: appear .3s ease-in-out forwards;
+    }
+  }
 }
 
-.todo-item input[type="checkbox"]:checked {
-  background-color: #3e9bff;
-  border-color: #3e9bff;
-}
-
-.todo-item input[type="checkbox"]:checked:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  border-radius: 2px;
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -75%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .todo-item label {
@@ -93,19 +108,22 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 3px;
 
-  button {
+  .task-btn {
     padding: 10px 10px;
     background-color: #3e9bff;
     transition: background-color 0.3s;
-
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-size: $font-size-medium;
     &:hover,
     &:active {
       background-color: lighten(#3e9bff, 10%);
     }
   }
 }
-
 
 
 .todo-editing-title{

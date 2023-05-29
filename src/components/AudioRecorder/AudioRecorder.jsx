@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import "./AudioRecorder.css"
+import styles from "./AudioRecorder.module.css"
 
 export function AudioRecorder({ addTodo, fetchTodos }) {
   const [isRecording, setIsRecording] = useState(false);
@@ -109,11 +109,11 @@ export function AudioRecorder({ addTodo, fetchTodos }) {
   };
 
   return (
-    <div className="audio-recorder-container">
-      <button onClick={handleStartRecording} disabled={isRecording}>
+    <div className={styles["audio-recorder-container"]}>
+      <button className={styles['btn-audio']} onClick={handleStartRecording} disabled={isRecording}>
         Start Recording
       </button>
-      <button onClick={handleStopRecording} disabled={!isRecording}>
+      <button className={styles['btn-audio']} onClick={handleStopRecording} disabled={!isRecording}>
         Stop Recording
       </button>
       {/* {audioURL && (

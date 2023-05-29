@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { useFirestore } from "../../context/firestoreContext";
 import styles from "./Task.module.scss";
 
-function Task({ todo, fetchTodos }) {
+function Task({ todo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(todo.title);
+  const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
   const { updateTodo, deleteTodo } = useFirestore();
   const textareaRef = useRef(null);
 
@@ -28,20 +29,30 @@ function Task({ todo, fetchTodos }) {
   const handleSave = async () => {
     if (newTitle !== "") {
       await updateTodo(todo.id, { title: newTitle });
-      fetchTodos();
       setIsEditing(false);
     }
   };
 
   const handleDelete = async () => {
     await deleteTodo(todo.id);
-    fetchTodos();
   };
 
   const handleCheckboxChange = async () => {
-    await updateTodo(todo.id, { isCompleted: !todo.isCompleted });
-    fetchTodos();
+    const previousIsCompleted = isCompleted;
+    setIsCompleted(!isCompleted); // Actualizar el estado local primero
+    updateTodo(todo.id, { isCompleted: !isCompleted }) // Actualizar Firestore en el fondo
+      .then(() => {
+        // Recuperar todos solo después de que Firestore se haya actualizado
+        setIsCompleted(!isCompleted);
+      })
+      .catch((error) => {
+        // Si la actualización falla, revertir el cambio en la interfaz de usuario y mostrar un mensaje de error
+        setIsCompleted(previousIsCompleted);
+        console.error("Error updating todo:", error);
+        alert("An error occurred while updating the todo. Please try again.");
+      });
   };
+
 
   return (
     <div className={styles["todo-item"]}>
@@ -52,12 +63,13 @@ function Task({ todo, fetchTodos }) {
               ref={textareaRef}
               className={styles["todo-editing-title"]}
               onChange={(e) => setNewTitle(e.target.value)}
+              defaultValue={newTitle}
             >
-              {newTitle}
+
             </textarea>
             <div className={styles["todo-action-buttons"]}>
-              <button onClick={handleSave}>💾</button>
-              <button onClick={handleCancel}>x</button>
+              <button className={styles['task-btn']} onClick={handleSave}>💾</button>
+              <button className={styles['task-btn']} onClick={handleCancel}>x</button>
             </div>
           </div>
         </div>
@@ -76,8 +88,8 @@ function Task({ todo, fetchTodos }) {
             </label>
           </div>
           <div className={styles["todo-action-buttons"]}>
-            <button onClick={handleEdit}>✏️</button>
-            <button onClick={handleDelete}>x</button>
+            <button className={styles['task-btn']} onClick={handleEdit}>✏️</button>
+            <button className={styles['task-btn']} onClick={handleDelete}>x</button>
           </div>
         </div>
       )}
@@ -85,4 +97,4 @@ function Task({ todo, fetchTodos }) {
   );
 }
 
-export default Task;
+export default memo(Task);

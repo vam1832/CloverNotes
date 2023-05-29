@@ -1,0 +1,23 @@
+@import "../../scss/variable";
+.day-container{
+    background-color: #3e9bff;
+    width: 3rem;
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-day{
+    font-family: $font-family-primary;
+    font-weight: bold;
+    color: $color-white;
+}
+
+.number-day{
+    font-family: $font-family-primary;
+    font-weight: lighter;
+    color: $color-white;
+}
